@@ -1,0 +1,40 @@
+version: '3.5'
+
+services:
+  php:
+    build:
+      context: ./docker/php
+      args:
+        - INSTALL_XDEBUG=${INSTALL_XDEBUG}
+    image: tuning-app
+    container_name: tuning-app
+    volumes:
+      - .:/var/www/app
+    environment:
+      - PHP_IDE_CONFIG=serverName=localhost
+      - FPM_PM_MAX_CHILDREN=${FPM_PM_MAX_CHILDREN}
+      - FPM_LISTEN_QUEUE=${FPM_LISTEN_QUEUE}
+    sysctls:
+      - net.core.somaxconn=${FPM_LISTEN_QUEUE}
+    networks:
+      - tuning-php
+
+  nginx:
+    build: ./docker/nginx
+    image: tuning-server
+    container_name: tuning-server
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "32800:80"
+    depends_on:
+      - php
+    networks:
+      - tuning-php
+
+networks:
+  tuning-php:
+    ipam:
+      config:
+        - subnet: "192.168.80.0/24"
+    name: tuning-php
