@@ -8,34 +8,19 @@
     
     docker-compose up -d
     
+    ./update-unit-conf.sh
+    
 ## TEST
 
     autocannon -c 5000 -x -t 15 localhost:32800
 
     ab -klc 5000 -n 50000 -r http://localhost:32800/
     
-## MONITORING
-
-PHP-FPM:
-    
-    http://localhost:32800/status
-    
-Nginx:
-
-    http://localhost:32800/status/nginx
-    
-    docker logs -f --tail 0 tuning-server | grep -v 200
-
-Подсчет ошибок:
-
-    docker logs tuning-server | grep -v 200 | wc -l
     
 ## CONFIGS
 
-.env:
+Nginx Unit config:`docker/nginx/config.json`
 
-    INSTALL_XDEBUG=false
+.env:
     
-    FPM_PM_MAX_CHILDREN=128
-    
-    FPM_LISTEN_QUEUE=10000
+    SOCKET_LISTEN_QUEUE=10000

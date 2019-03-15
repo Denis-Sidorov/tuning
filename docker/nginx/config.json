@@ -1,0 +1,38 @@
+{
+    "settings": {
+        "http": {
+            "header_read_timeout": 10,
+            "body_read_timeout": 10,
+            "send_timeout": 10,
+            "idle_timeout": 120,
+            "max_body_size": 6291456
+        }
+    },
+    "listeners": {
+        "*:8000": {
+            "pass": "applications/random"
+        }
+    },
+    "applications": {
+        "random": {
+            "type": "php",
+            "processes": 20,
+            "root": "/www/public",
+            "script": "index.php",
+            "limits": {
+                "timeout": 30
+            },
+            "options": {
+                "file": "/etc/php.ini",
+                "admin": {
+                    "memory_limit": "256M",
+                    "variables_order": "EGPCS",
+                    "expose_php": "0"
+                },
+                "user": {
+                    "display_errors": "0"
+                }
+            }
+        }
+    }
+}
