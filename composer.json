@@ -1,0 +1,11 @@
+{
+    "require": {
+        "react/event-loop": "^1.1",
+        "react/http": "^0.8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "MyApp\\": "src/"
+        }
+    }
+}

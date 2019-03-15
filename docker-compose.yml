@@ -2,14 +2,15 @@ version: '3.5'
 
 services:
   app:
-    image: nginx/unit
+    image: php:cli-alpine
+    command: ["php", "/var/www/public/index.php"]
     container_name: tuning-app
     volumes:
-      - .:/www
+      - .:/var/www
     sysctls:
       - net.core.somaxconn=${SOCKET_LISTEN_QUEUE}
     ports:
-      - "32800:8000"
+      - "32800:8080"
     networks:
       - tuning-php
 

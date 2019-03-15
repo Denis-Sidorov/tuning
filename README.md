@@ -1,12 +1,12 @@
 # Tuning
 
-Сервис для проверки твиков nginx (`nginx.conf`) и php-fpm (`zz-workers.conf`)
+Сервис для проверки твиков php
 
 ## INSTALL
     
-    docker-compose up -d
+    composer install
     
-    ./update-unit-conf.sh
+    docker-compose up -d
     
 ## TEST
 
@@ -16,8 +16,6 @@
     
     
 ## CONFIGS
-
-Nginx Unit config:`docker/nginx/config.json`
 
 .env:
     
