@@ -4,8 +4,6 @@
 
 ## INSTALL
     
-    docker-compose build
-    
     docker-compose up -d
     
     ./update-unit-conf.sh
